@@ -371,34 +371,37 @@ namespace JST
             bias = 0;
         }
 
-        public string getPrintToExcel()
+        public string getPrintToExcel(bool print)
         {
-            int countFont = 1;
-            string input = "";
-
-            foreach (var items in ListFont)
+            if (print)
             {
-                input += "Font ke" + countFont + "\n";
+                int countFont = 1;
+                string input = "";
 
-                for (int i = 0; i < 63; i++)
+                foreach (var items in ListFont)
                 {
-                    input = input + "X" + (i + 1) + ",";
-                }
-                input += "\n";
-                foreach (var item in items)
-                {
+                    input += "Font ke" + countFont + "\n";
 
-                    for (int i = 0; i < item.x.Length; i++)
+                    for (int i = 0; i < 63; i++)
                     {
-                        input = input + item.x[i] + ",";
+                        input = input + "X" + (i + 1) + ",";
                     }
-
                     input += "\n";
+                    foreach (var item in items)
+                    {
 
+                        for (int i = 0; i < item.x.Length; i++)
+                        {
+                            input = input + item.x[i] + ",";
+                        }
+
+                        input += "\n";
+
+                    }
+                    countFont++;
                 }
-                countFont++;
+                printExcel = input + printExcel;
             }
-            printExcel = input + printExcel;
             return printExcel;
         }
 
